@@ -1,6 +1,6 @@
 package com.nguyenDat;
 
-import javafx.stage.Window;
+import com.nguyenDat.DataDictionary.DataDictionarySQL;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +20,9 @@ public class Dictionary {
         new InputApp();
         new ListWord();
         new OutputApp();
-        //new ButtomApp();
-        jPanel.setBackground(new Color(0x79C5FC));
+        new ButtomApp();
+        new DataDictionarySQL();
+        jPanel.setBackground(new Color(0xA25407));
         jPanel.setSize(mainFrame.getSize());
 
         mainFrame.add(jPanel);
