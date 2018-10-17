@@ -41,24 +41,26 @@ public class ButtomApp implements ActionListener {
         if(e.getSource() == bSearch){
             String mean;
             mean = DataDictionarySQL.SearchAnhViet(InputApp.getTextInput().getText());
-            if(InputApp.getTextInput().getText().equals("")) {
+            if(!InputApp.getTextInput().getText().equals("")) {
                 if (!mean.equals("")) {
                     OutputApp.getOutputApp().setText(mean);
                 } else {
                     JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ không có trong từ điển", "Thông báo", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
                 }
             }
-        }else
-            if(e.getSource() == bAdd){
+        }else {
+            if (e.getSource() == bAdd) {
+            } else {
+                if (e.getSource() == bEdit) {
 
-            }else
-                if(e.getSource() == bEdit){
+                } else {
+                    if (e.getSource() == bDelete) {
 
-                }else
-                    if(e.getSource() == bDelete){
-
-                    }else{
+                    } else {
 
                     }
+                }
+            }
+        }
     }
 }

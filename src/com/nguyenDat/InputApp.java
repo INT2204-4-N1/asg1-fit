@@ -1,8 +1,7 @@
 package com.nguyenDat;
 
+
 import javax.swing.*;
-import javax.swing.border.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -14,6 +13,7 @@ public class InputApp implements KeyListener {
     public InputApp(){
         textInput = new JTextField();
         textInput.setBounds(10,50,230,35);
+        textInput.addKeyListener(this);
         Dictionary.getFrame().add(textInput);
     }
 
@@ -29,6 +29,6 @@ public class InputApp implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        ListWord.UpdateList();
     }
 }

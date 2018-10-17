@@ -1,6 +1,9 @@
 package com.nguyenDat.DataDictionary;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DataDictionarySQL {
     private static Connection con;
@@ -10,7 +13,7 @@ public class DataDictionarySQL {
     }
     public static String SearchAnhViet(String w){
         try {
-            pstm = con.prepareStatement("select detail from tbl_edict where word = ?");
+            pstm = con.prepareStatement("select detail from dictionary where word = ?");
             pstm.setString(1,w);
 
             ResultSet rs = pstm.executeQuery();
@@ -19,7 +22,7 @@ public class DataDictionarySQL {
                 mean = rs.getString("detail");
             }
             return mean;
-        }catch (SQLException e){
+        }catch (java.sql.SQLException e){
             System.out.println(e);
         }
         return "";
@@ -29,13 +32,60 @@ public class DataDictionarySQL {
     public void SearchVietAnh(String word){
 
     }
-    public void ListWord(String word){
+    public static String[] ListWord(String word){
+        try {
+            pstm = con.prepareStatement("SELECT word FROM dictionary WHERE word  LIKE ?");
+            pstm.setString(1,word + "%");
+            ResultSet rs = pstm.executeQuery();
+            String mean[] =  new String[101]; int i =0;
 
+            while(rs.next()){
+                mean[i] = rs.getString("word");
+                i++;
+                if(i > 100) return mean;
+            }
+            if(i < 100){
+                String[] mean2 = new String[i];
+                for(int j = 0; j < i; j++){
+                    mean2[j] = mean[j];
+                }
+                return mean2;
+            }
+            return mean;
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+        return null;
     }
     public void DeleteWord(String word){
+        try {
+            pstm = con.prepareStatement("delete from dictionary where word = ?");
+            pstm.setString(1,word);
+            pstm.executeUpdate();
 
+        }catch (java.sql.SQLException e){
+            System.out.println(e);
+        }
     }
-    public void UpdateWord(String word, String mean){
-
+    public void UpdateWord(String oldWord,String word, String mean){
+        try {
+            pstm = con.prepareStatement("update dictionary set word = ?,detail = ? where word = ?");
+            pstm.setString(1,word);
+            pstm.setString(2,mean);
+            pstm.setString(3,oldWord);
+            pstm.executeUpdate();
+        }catch (java.sql.SQLException e){
+            System.out.println(e);
+        }
+    }
+    public void addWord(String word,String mean){
+        try {
+            pstm = con.prepareStatement("insert into dictionary(word,detail) values (?,?)");
+            pstm.setString(1,word);
+            pstm.setString(2,mean);
+            pstm.executeUpdate();
+        }catch (java.sql.SQLException e){
+            System.out.println(e);
+        }
     }
 }

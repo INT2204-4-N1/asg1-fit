@@ -1,26 +1,1 @@
-package com.nguyenDat;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-public class ListWord implements ListSelectionListener {
-    private static JList list  = new JList();
-    private static JScrollPane Scroll = new JScrollPane() ;
-
-    public static JList getList(){
-        return list;
-    }
-    public ListWord(){
-        list.setBounds(10,85,230,450);
-        Scroll.add(list);
-        Scroll.setBounds(10,85,230,450);
-
-        Dictionary.getFrame().add(Scroll);
-    }
-
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-
-    }
-}
+package com.nguyenDat;import com.nguyenDat.DataDictionary.DataDictionarySQL;import javax.swing.*;import javax.swing.event.ListSelectionEvent;import javax.swing.event.ListSelectionListener;import java.awt.event.KeyEvent;import java.awt.event.KeyListener;public class ListWord implements ListSelectionListener {    private static JList list  = new JList();    private JScrollPane Scroll = new JScrollPane(list) ;    public ListWord(){        list.setBounds(10,85,230,450);        Scroll.setBounds(10,85,230,450);        Dictionary.getFrame().add(Scroll);    }    public static void UpdateList(){        String w = InputApp.getTextInput().getText();        String listWord[] = DataDictionarySQL.ListWord(w);        list.setListData(listWord);    }    @Override    public void valueChanged(ListSelectionEvent e) {    }}
