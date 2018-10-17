@@ -7,33 +7,39 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ButtomApp implements ActionListener {
-    private JButton bSearch,bAdd,bEdit,bDelete,bSound;
+    private JButton bSearch,bAdd,bEdit,bDelete;
     public ButtomApp(){
-        bSearch = new JButton("search");
-        bSearch.setBounds(250,50,60,35);
+        bSearch = new JButton(loadImage.load("image/search.png",80,70));
+        bSearch.setContentAreaFilled(false);
+        bSearch.setBorder(BorderFactory.createEmptyBorder());
+        bSearch.setBounds(275,18,82,45);
 
-        bAdd = new JButton("add");
-        bAdd.setBounds(250,95,60,35);
+        bAdd = new JButton(loadImage.load("image/add.png",80,70));
+        bAdd.setContentAreaFilled(false);
+        bAdd.setBorder(BorderFactory.createEmptyBorder());
+        bAdd.setBounds(275,60,82,45);
 
-        bEdit = new JButton("Edit");
-        bEdit.setBounds(250,140,60,35);
-        bDelete = new JButton("delete");
-        bDelete.setBounds(250,185,60,35);
+        bEdit = new JButton(loadImage.load("image/edit.png",80,70));
+        bEdit.setContentAreaFilled(false);
+        bEdit.setBorder(BorderFactory.createEmptyBorder());
+        bEdit.setBounds(275,102,82,45);
 
-        bSound = new JButton("sound");
-        bSound.setBounds(250,230,60,35);
+        bDelete = new JButton(loadImage.load("image/delete.png",80,70));
+        bDelete.setContentAreaFilled(false);
+        bDelete.setBorder(BorderFactory.createEmptyBorder());
+        bDelete.setBounds(275,144,82,45);
+
+
 
         bSearch.addActionListener(this);
         bAdd.addActionListener(this);
         bEdit.addActionListener(this);
         bDelete.addActionListener(this);
-        bSound.addActionListener(this);
 
         Dictionary.getFrame().add(bAdd);
         Dictionary.getFrame().add(bSearch);
         Dictionary.getFrame().add(bEdit);
         Dictionary.getFrame().add(bDelete);
-        Dictionary.getFrame().add(bSound);
     }
 
     @Override

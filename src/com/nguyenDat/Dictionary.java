@@ -16,7 +16,7 @@ public class Dictionary {
     public Dictionary(){
         mainFrame = new JFrame();
         mainFrame.setTitle("Dictionary");
-        mainFrame.setBounds(150,100,800,600);
+        mainFrame.setBounds(150,10,890,680);
         new InputApp();
         new ListWord();
         new OutputApp();

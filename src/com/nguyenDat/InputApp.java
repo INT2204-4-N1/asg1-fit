@@ -2,6 +2,8 @@ package com.nguyenDat;
 
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -12,7 +14,9 @@ public class InputApp implements KeyListener {
     }
     public InputApp(){
         textInput = new JTextField();
-        textInput.setBounds(10,50,230,35);
+        textInput.setBounds(15,20,255,40);
+        textInput.setFont(new Font(Font.DIALOG,Font.ITALIC,20));
+        textInput.setBackground(new Color(0xFFEFC1));
         textInput.addKeyListener(this);
         Dictionary.getFrame().add(textInput);
     }
@@ -29,6 +33,11 @@ public class InputApp implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if(InputApp.getTextInput().getText().equals("")){
+            OutputApp.getOutputApp().setText("<html>   <head>        </head>   <body>   </body> </html> ");
+            OutputApp.getOutputApp();
+        }
         ListWord.UpdateList();
     }
 }
+
