@@ -1,5 +1,7 @@
 package com.nguyenDat;
 
+import com.nguyenDat.Sound.SoundApp;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -40,6 +42,7 @@ public class OutputApp implements  ActionListener {
         bSound.setBorder(BorderFactory.createEmptyBorder());
         bSound.setBounds(440,5,32,32);
         bSound.setEnabled(false);
+        bSound.addActionListener(this);
         outPut.add(bSound);
         outPut.setBounds(355,65,500,550);
         jScrollPane = new JScrollPane(outPut);
@@ -49,6 +52,6 @@ public class OutputApp implements  ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        SoundApp.Sound(InputApp.getTextInput().getText());
     }
 }
