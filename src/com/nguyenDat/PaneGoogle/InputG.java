@@ -2,13 +2,12 @@ package com.nguyenDat.PaneGoogle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.security.Key;
 
-public class InputG implements KeyListener {
+public class InputG{
     private static JTextArea Input;
     private JScrollPane Scroll;
+    static String Word = "";
+    static String Mean = "";
 
     public static JTextArea getInput() {
         return Input;
@@ -16,30 +15,16 @@ public class InputG implements KeyListener {
 
     public InputG() {
         Input = new JTextArea();
-        Input.setBounds(30, 100, 800, 150);
+        Input.setBounds(40, 110, 800, 150);
         Input.setBorder(BorderFactory.createLineBorder(new Color(0x07658F), 3));
         Input.setFont(new Font(Font.DIALOG,Font.BOLD,16));
         Input.setLineWrap(true);
         Input.setWrapStyleWord(true);
 
         Scroll = new JScrollPane(Input);
-        Scroll.setBounds(Input.getBounds());
+        Scroll.setBounds(30,100,800,150);
 
         PaneGoogleTranslate.getPaneGoogleTranslate().add(Scroll);
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }

@@ -25,10 +25,23 @@ public class ButtonG implements ActionListener, MouseInputListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String mean = searchGoogle.SearchGoogleTranslate(InputG.getInput().getText(), "en", "vi");
-        OutputG.getOutput().setText(mean);
+        if(!InputG.getInput().getText().equals(""))
+            OutputG.getOutput().setText(Search());
     }
 
+    public String Search(){
+        String w = InputG.getInput().getText();
+        String Mean = "";
+        int start = 0;
+        for(int i = 0; i < w.length();i++){
+            if(w.charAt(i) == 10 || w.charAt(i) == '.' || i == w.length() - 1){
+                Mean+= searchGoogle.SearchGoogleTranslate(w.substring(start,i+1),"en","vi");
+                if(w.charAt(i) == 10) Mean+="\n";
+                start = i+1;
+            }
+        }
+        return Mean;
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
 

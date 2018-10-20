@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class OutputG {
     private static JTextArea Output;
+    private static JScrollPane Scroll;
 
     public static JTextArea getOutput() {
         return Output;
@@ -17,7 +18,9 @@ public class OutputG {
         Output.setFont(new Font(Font.DIALOG,Font.BOLD,16));
         Output.setLineWrap(true);
         Output.setWrapStyleWord(true);
+        Scroll = new JScrollPane(Output);
+        Scroll.setBounds(Output.getBounds());
 
-        PaneGoogleTranslate.getPaneGoogleTranslate().add(Output);
+        PaneGoogleTranslate.getPaneGoogleTranslate().add(Scroll);
     }
 }
