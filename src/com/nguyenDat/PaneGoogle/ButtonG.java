@@ -25,10 +25,8 @@ public class ButtonG implements ActionListener, MouseInputListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(InputG.getInput().getText());
         String mean = searchGoogle.SearchGoogleTranslate(InputG.getInput().getText(), "en", "vi");
-        //OutputG.getOutput().setText(mean);
-        System.out.println(mean);
+        OutputG.getOutput().setText(mean);
     }
 
     @Override
