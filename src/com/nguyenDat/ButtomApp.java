@@ -1,72 +1,153 @@
 package com.nguyenDat;
 
 import com.nguyenDat.DataDictionary.*;
+import com.nguyenDat.Sound.SoundApp;
 
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
-public class ButtomApp implements ActionListener {
-    private JButton bSearch,bAdd,bEdit,bDelete;
+public class ButtomApp implements ActionListener, MouseInputListener {
+    private JButton bAdd,bEdit,bDelete,bSound;
+    private EditAddOption editAddOption;
     public ButtomApp(){
-        bSearch = new JButton(loadImage.load("image/search.png",80,70));
-        bSearch.setContentAreaFilled(false);
-        bSearch.setBorder(BorderFactory.createEmptyBorder());
-        bSearch.setBounds(275,18,82,45);
-
-        bAdd = new JButton(loadImage.load("image/add.png",80,70));
+        editAddOption = new EditAddOption();
+        bAdd = new JButton(loadImage.load("image/add.png",40,40));
         bAdd.setContentAreaFilled(false);
         bAdd.setBorder(BorderFactory.createEmptyBorder());
-        bAdd.setBounds(275,60,82,45);
+        bAdd.setBounds(680,95,40,40);
 
-        bEdit = new JButton(loadImage.load("image/edit.png",80,70));
+        bEdit = new JButton(loadImage.load("image/edit.png",40,40));
         bEdit.setContentAreaFilled(false);
         bEdit.setBorder(BorderFactory.createEmptyBorder());
-        bEdit.setBounds(275,102,82,45);
+        bEdit.setBounds(630,95,40,40);
 
-        bDelete = new JButton(loadImage.load("image/delete.png",80,70));
+        bDelete = new JButton(loadImage.load("image/delete.png",45,45));
         bDelete.setContentAreaFilled(false);
         bDelete.setBorder(BorderFactory.createEmptyBorder());
-        bDelete.setBounds(275,144,82,45);
+        bDelete.setBounds(730,95,40,40);
 
-
-
-        bSearch.addActionListener(this);
         bAdd.addActionListener(this);
         bEdit.addActionListener(this);
         bDelete.addActionListener(this);
+        bAdd.addMouseListener(this);
+        bEdit.addMouseListener(this);
+        bDelete.addMouseListener(this);
 
-        Dictionary.getFrame().add(bAdd);
-        Dictionary.getFrame().add(bSearch);
-        Dictionary.getFrame().add(bEdit);
-        Dictionary.getFrame().add(bDelete);
+        bSound = new JButton(loadImage.load("image/sound.png",35,35));
+        bSound.setContentAreaFilled(false);
+        bSound.setBorder(BorderFactory.createEmptyBorder());
+        bSound.setBounds(780,97,35,35);
+
+        bSound.addActionListener(this);
+        bSound.addMouseListener(this);
+
+        bAdd.setEnabled(false);
+        bSound.setEnabled(false);
+        bDelete.setEnabled(false);
+        bEdit.setEnabled(false);
+
+
+        PanelBasic.getPaneBasic().add(bSound);
+        PanelBasic.getPaneBasic().add(bAdd);
+        PanelBasic.getPaneBasic().add(bEdit);
+        PanelBasic.getPaneBasic().add(bDelete);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == bSearch){
-            String mean;
-            mean = DataDictionarySQL.SearchAnhViet(InputApp.getTextInput().getText());
-            if(!InputApp.getTextInput().getText().equals("")) {
-                if (!mean.equals("")) {
-                    OutputApp.getOutputApp().setText(mean);
-                } else {
-                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ không có trong từ điển", "Thông báo", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }else {
-            if (e.getSource() == bAdd) {
-            } else {
-                if (e.getSource() == bEdit) {
-
-                } else {
-                    if (e.getSource() == bDelete) {
-
-                    } else {
-
-                    }
-                }
+        if(e.getSource() == bSound){
+            SoundApp.Sound();
+        }
+        if(e.getSource() == bDelete){
+            DeleteWorḍ(InputApp.getTextInput().getText());
+        }
+        if(e.getSource() == bEdit){
+            String mean = DataDictionarySQL.SearchAnhViet(InputApp.getTextInput().getText());
+            if(mean == null || InputApp.getTextInput().getText().equals("")){
+                if(InputApp.getTextInput().getText().equals(""))
+                    JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Nhập từ cần sửa vào ô tìm kiếm","Thông báo",JOptionPane.DEFAULT_OPTION);
+                else
+                    JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Từ cần sửa không có trong từ điển của bạn","Thông báo",JOptionPane.DEFAULT_OPTION);
+            }else {
+                        editAddOption.EditWord(InputApp.getTextInput().getText());
             }
         }
+        if(e.getSource() == bAdd){
+            editAddOption.AddWord();
+        }
+    }
+    public void DeleteWorḍ(String word){
+        String mean = DataDictionarySQL.SearchAnhViet(word);
+        if(mean == null){
+            JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Từ muốn xóa không có trong từ điển của bạn","Thông báo",JOptionPane.DEFAULT_OPTION);
+        }else{
+            int a = JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Bạn có chắc muốn xóa từ này ?","Thông báo",JOptionPane.YES_NO_OPTION);
+            if(a == JOptionPane.YES_OPTION){
+                DataDictionarySQL.DeleteWord(word);
+                JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Xóa thành công","Thông báo",JOptionPane.DEFAULT_OPTION);
+                OutputApp.getOutputApp().setText("<html><head></head><body></body></html>");
+                ListWord.UpdateList();
+            }
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if(e.getSource() == bSound){
+            bSound.setEnabled(true);
+        }
+        if(e.getSource() == bAdd){
+            bAdd.setEnabled(true);
+        }
+        if(e.getSource() == bDelete){
+            bDelete.setEnabled(true);
+        }
+        if(e.getSource() == bEdit){
+            bEdit.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if(e.getSource() == bSound){
+            bSound.setEnabled(false);
+        }
+        if(e.getSource() == bAdd){
+            bAdd.setEnabled(false);
+        }
+        if(e.getSource() == bDelete){
+            bDelete.setEnabled(false);
+        }
+        if(e.getSource() == bEdit){
+            bEdit.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 }

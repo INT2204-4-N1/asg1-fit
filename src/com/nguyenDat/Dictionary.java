@@ -5,8 +5,8 @@ import com.nguyenDat.DataDictionary.DataDictionarySQL;
 import javax.swing.*;
 import java.awt.*;
 
-public class Dictionary {
-    private JPanel jPanel = new JPanel();
+public class Dictionary{
+
     private static JFrame mainFrame;
     private InputApp inputApp;
 
@@ -16,16 +16,17 @@ public class Dictionary {
     public Dictionary(){
         mainFrame = new JFrame();
         mainFrame.setTitle("Dictionary");
-        mainFrame.setBounds(150,10,890,680);
+        mainFrame.setBounds(150,10,900,680);
+
+        new PanelBasic();
+        new Menu();
         new InputApp();
         new ListWord();
         new OutputApp();
         new ButtomApp();
         new DataDictionarySQL();
-        jPanel.setBackground(new Color(0xA25407));
-        jPanel.setSize(mainFrame.getSize());
-
-        mainFrame.add(jPanel);
+        mainFrame.setBackground(Color.WHITE);
+        mainFrame.setAlwaysOnTop(true);
         mainFrame.setLayout(null);
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

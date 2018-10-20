@@ -1,17 +1,21 @@
 package com.nguyenDat.Sound;
-import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
+
+import GoogleAPI.Language;
+
+import java.io.InputStream;
 
 public class SoundApp {
-    private static final String VOICE = "kevin16";
-    public static void Sound(String Word){
+    private static String word;
+
+    public static void setWord(String word) {
+        SoundApp.word = word;
+    }
+
+    public static void Sound(){
         try{
-            System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
-            Voice voice;
-            VoiceManager vm = VoiceManager.getInstance();
-            voice = vm.getVoice(VOICE);
-            voice.allocate();
-            voice.speak(Word);
+            GoogleAPI.Audio audio = GoogleAPI.Audio.getInstance();
+            InputStream sound = audio.getAudio(word, Language.ENGLISH);
+            audio.play(sound);
         }catch(Exception e){
             System.out.println(e);
         }

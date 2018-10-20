@@ -19,11 +19,10 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/file jar" />
+          <root url="jar://$MODULE_DIR$/file jar/jl1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/file jar" recursive="false" />
       </library>
     </orderEntry>
   </component>

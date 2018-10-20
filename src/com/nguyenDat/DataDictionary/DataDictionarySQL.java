@@ -17,7 +17,7 @@ public class DataDictionarySQL {
             pstm.setString(1,w);
 
             ResultSet rs = pstm.executeQuery();
-            String mean = "";
+            String mean = null;
             while(rs.next()){
                 mean = rs.getString("detail");
             }
@@ -25,11 +25,11 @@ public class DataDictionarySQL {
         }catch (java.sql.SQLException e){
             System.out.println(e);
         }
-        return "";
+        return null;
 
     }
 
-    public void SearchVietAnh(String word){
+    public static void SearchVietAnh(String word){
 
     }
     public static String[] ListWord(String word){
@@ -57,7 +57,7 @@ public class DataDictionarySQL {
         }
         return null;
     }
-    public void DeleteWord(String word){
+    public static void DeleteWord(String word){
         try {
             pstm = con.prepareStatement("delete from dictionary where word = ?");
             pstm.setString(1,word);
@@ -67,7 +67,8 @@ public class DataDictionarySQL {
             System.out.println(e);
         }
     }
-    public void UpdateWord(String oldWord,String word, String mean){
+    public static void UpdateWord(String oldWord,String word, String mean){
+        System.out.println("dat");
         try {
             pstm = con.prepareStatement("update dictionary set word = ?,detail = ? where word = ?");
             pstm.setString(1,word);
@@ -78,7 +79,7 @@ public class DataDictionarySQL {
             System.out.println(e);
         }
     }
-    public void addWord(String word,String mean){
+    public static void addWord(String word,String mean){
         try {
             pstm = con.prepareStatement("insert into dictionary(word,detail) values (?,?)");
             pstm.setString(1,word);
