@@ -1,10 +1,10 @@
-package com.nguyenDat;
+package com.nguyenDat.PaneHome;
 
 
 import com.nguyenDat.DataDictionary.DataDictionarySQL;
+import com.nguyenDat.Dictionary;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -27,7 +27,7 @@ public class InputApp implements KeyListener {
         textInput.add(jLabel);
         textInput.addKeyListener(this);
         textInput.setBorder(BorderFactory.createLineBorder(new Color(0x07658F), 3));
-        PanelBasic.getPaneBasic().add(textInput);
+        PaneHome.getPaneHome().add(textInput);
     }
 
     @Override

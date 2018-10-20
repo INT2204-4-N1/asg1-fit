@@ -25,7 +25,7 @@ public class loadImage {
                 dy = dx * iy / ix;
             }
 
-            return new ImageIcon(image.getScaledInstance(dx, dy,image.SCALE_SMOOTH));
+            return new ImageIcon(image.getScaledInstance(dx, dy, image.SCALE_SMOOTH));
 
         } catch (IOException e) {
 

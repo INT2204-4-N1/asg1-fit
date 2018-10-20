@@ -1,7 +1,10 @@
-package com.nguyenDat;
+package com.nguyenDat.PaneHome;
 
 import com.nguyenDat.DataDictionary.*;
+import com.nguyenDat.Dictionary;
+import com.nguyenDat.PaneHome.*;
 import com.nguyenDat.Sound.SoundApp;
+import com.nguyenDat.loadImage;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
@@ -10,24 +13,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 public class ButtomApp implements ActionListener, MouseInputListener {
-    private JButton bAdd,bEdit,bDelete,bSound;
+    private JButton bAdd, bEdit, bDelete, bSound;
     private EditAddOption editAddOption;
-    public ButtomApp(){
+
+    public ButtomApp() {
         editAddOption = new EditAddOption();
-        bAdd = new JButton(loadImage.load("image/add.png",40,40));
+        bAdd = new JButton(loadImage.load("image/add.png", 40, 40));
         bAdd.setContentAreaFilled(false);
         bAdd.setBorder(BorderFactory.createEmptyBorder());
-        bAdd.setBounds(680,95,40,40);
+        bAdd.setBounds(680, 95, 40, 40);
 
-        bEdit = new JButton(loadImage.load("image/edit.png",40,40));
+        bEdit = new JButton(loadImage.load("image/edit.png", 40, 40));
         bEdit.setContentAreaFilled(false);
         bEdit.setBorder(BorderFactory.createEmptyBorder());
-        bEdit.setBounds(630,95,40,40);
+        bEdit.setBounds(630, 95, 40, 40);
 
-        bDelete = new JButton(loadImage.load("image/delete.png",45,45));
+        bDelete = new JButton(loadImage.load("image/delete.png", 45, 45));
         bDelete.setContentAreaFilled(false);
         bDelete.setBorder(BorderFactory.createEmptyBorder());
-        bDelete.setBounds(730,95,40,40);
+        bDelete.setBounds(730, 95, 40, 40);
 
         bAdd.addActionListener(this);
         bEdit.addActionListener(this);
@@ -36,10 +40,10 @@ public class ButtomApp implements ActionListener, MouseInputListener {
         bEdit.addMouseListener(this);
         bDelete.addMouseListener(this);
 
-        bSound = new JButton(loadImage.load("image/sound.png",35,35));
+        bSound = new JButton(loadImage.load("image/sound.png", 35, 35));
         bSound.setContentAreaFilled(false);
         bSound.setBorder(BorderFactory.createEmptyBorder());
-        bSound.setBounds(780,97,35,35);
+        bSound.setBounds(780, 97, 35, 35);
 
         bSound.addActionListener(this);
         bSound.addMouseListener(this);
@@ -50,44 +54,45 @@ public class ButtomApp implements ActionListener, MouseInputListener {
         bEdit.setEnabled(false);
 
 
-        PanelBasic.getPaneBasic().add(bSound);
-        PanelBasic.getPaneBasic().add(bAdd);
-        PanelBasic.getPaneBasic().add(bEdit);
-        PanelBasic.getPaneBasic().add(bDelete);
+        PaneHome.getPaneHome().add(bSound);
+        PaneHome.getPaneHome().add(bAdd);
+        PaneHome.getPaneHome().add(bEdit);
+        PaneHome.getPaneHome().add(bDelete);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == bSound){
+        if (e.getSource() == bSound) {
             SoundApp.Sound();
         }
-        if(e.getSource() == bDelete){
+        if (e.getSource() == bDelete) {
             DeleteWorḍ(InputApp.getTextInput().getText());
         }
-        if(e.getSource() == bEdit){
+        if (e.getSource() == bEdit) {
             String mean = DataDictionarySQL.SearchAnhViet(InputApp.getTextInput().getText());
-            if(mean == null || InputApp.getTextInput().getText().equals("")){
-                if(InputApp.getTextInput().getText().equals(""))
-                    JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Nhập từ cần sửa vào ô tìm kiếm","Thông báo",JOptionPane.DEFAULT_OPTION);
+            if (mean == null || InputApp.getTextInput().getText().equals("")) {
+                if (InputApp.getTextInput().getText().equals(""))
+                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Nhập từ cần sửa vào ô tìm kiếm", "Thông báo", JOptionPane.DEFAULT_OPTION);
                 else
-                    JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Từ cần sửa không có trong từ điển của bạn","Thông báo",JOptionPane.DEFAULT_OPTION);
-            }else {
-                        editAddOption.EditWord(InputApp.getTextInput().getText());
+                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ cần sửa không có trong từ điển của bạn", "Thông báo", JOptionPane.DEFAULT_OPTION);
+            } else {
+                editAddOption.EditWord(InputApp.getTextInput().getText());
             }
         }
-        if(e.getSource() == bAdd){
+        if (e.getSource() == bAdd) {
             editAddOption.AddWord();
         }
     }
-    public void DeleteWorḍ(String word){
+
+    public void DeleteWorḍ(String word) {
         String mean = DataDictionarySQL.SearchAnhViet(word);
-        if(mean == null){
-            JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Từ muốn xóa không có trong từ điển của bạn","Thông báo",JOptionPane.DEFAULT_OPTION);
-        }else{
-            int a = JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Bạn có chắc muốn xóa từ này ?","Thông báo",JOptionPane.YES_NO_OPTION);
-            if(a == JOptionPane.YES_OPTION){
+        if (mean == null) {
+            JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ muốn xóa không có trong từ điển của bạn", "Thông báo", JOptionPane.DEFAULT_OPTION);
+        } else {
+            int a = JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Bạn có chắc muốn xóa từ này ?", "Thông báo", JOptionPane.YES_NO_OPTION);
+            if (a == JOptionPane.YES_OPTION) {
                 DataDictionarySQL.DeleteWord(word);
-                JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Xóa thành công","Thông báo",JOptionPane.DEFAULT_OPTION);
+                JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Xóa thành công", "Thông báo", JOptionPane.DEFAULT_OPTION);
                 OutputApp.getOutputApp().setText("<html><head></head><body></body></html>");
                 ListWord.UpdateList();
             }
@@ -111,32 +116,32 @@ public class ButtomApp implements ActionListener, MouseInputListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if(e.getSource() == bSound){
+        if (e.getSource() == bSound) {
             bSound.setEnabled(true);
         }
-        if(e.getSource() == bAdd){
+        if (e.getSource() == bAdd) {
             bAdd.setEnabled(true);
         }
-        if(e.getSource() == bDelete){
+        if (e.getSource() == bDelete) {
             bDelete.setEnabled(true);
         }
-        if(e.getSource() == bEdit){
+        if (e.getSource() == bEdit) {
             bEdit.setEnabled(true);
         }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if(e.getSource() == bSound){
+        if (e.getSource() == bSound) {
             bSound.setEnabled(false);
         }
-        if(e.getSource() == bAdd){
+        if (e.getSource() == bAdd) {
             bAdd.setEnabled(false);
         }
-        if(e.getSource() == bDelete){
+        if (e.getSource() == bDelete) {
             bDelete.setEnabled(false);
         }
-        if(e.getSource() == bEdit){
+        if (e.getSource() == bEdit) {
             bEdit.setEnabled(false);
         }
     }
