@@ -50,10 +50,16 @@ public class DataDictionarySQL {
             pstm.setString(1, word + "%");
             ResultSet rs = pstm.executeQuery();
             String mean[] = new String[101];
+            mean[0] = SearchAnhViet(word);
             int i = 0;
+            if(mean[0] != null){
+                mean[0] = word;
+                i= 1;
+            }
 
             while (rs.next()) {
                 mean[i] = rs.getString("word");
+                if(mean[i].equals(word)) continue;
                 i++;
                 if (i > 100) return mean;
             }
