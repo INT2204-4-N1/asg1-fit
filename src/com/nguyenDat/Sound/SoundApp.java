@@ -1,10 +1,7 @@
 package com.nguyenDat.Sound;
 
 import GoogleAPI.Language;
-import com.nguyenDat.DataDictionary.DataDictionarySQL;
-import com.nguyenDat.Dictionary;
 
-import javax.swing.*;
 import java.io.InputStream;
 
 public class SoundApp {
@@ -15,10 +12,12 @@ public class SoundApp {
     public static void setWord(String word) {
         SoundApp.word = word;
     }
-
-    public static void Sound() {
+    public static void Sound(boolean AnhViet) {
         try {
-            sound = audio.getAudio(word, Language.ENGLISH);
+            if(AnhViet)
+                sound = audio.getAudio(word, Language.ENGLISH);
+            else
+                sound = audio.getAudio(word, Language.VIETNAMESE);
             audio.play(sound);
         } catch (Exception e) {
         }

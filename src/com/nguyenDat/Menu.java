@@ -11,8 +11,9 @@ import java.awt.event.MouseEvent;
 public class Menu implements MouseInputListener {
     private JPanel jPanelMenu;
     private JButton jButton3gach, h;
-    private JLabel DicImage, jLabelHome, jLableG;
-    private JPanel Home, Google;
+    private JLabel DicImage, jLabelAV, jLableG,jLabelVA;
+    private JButton quit;
+    private JPanel searchAV,searchVA, Google;
 
     public Menu() {
         jPanelMenu = new JPanel();
@@ -24,25 +25,41 @@ public class Menu implements MouseInputListener {
         DicImage.setBounds(0, 20, 200, 80);
         DicImage.setVisible(false);
 
-        Home = new JPanel();
+        searchAV = new JPanel();
+        searchVA = new JPanel();
         Google = new JPanel();
 
-        Home.setBounds(0, 100, 200, 50);
-        Home.setBorder(BorderFactory.createRaisedSoftBevelBorder());
-        Home.setBackground(new Color(0x075A8F));
-        Google.setBounds(0, 151, 200, 50);
+        searchAV.setBounds(0, 150, 200, 50);
+        searchAV.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+        searchAV.setBackground(new Color(0x075A8F));
+
+        searchVA.setBounds(0, 202, 200, 50);
+        searchVA.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+        searchVA.setBackground(new Color(0x075A8F));
+
+        Google.setBounds(0, 254, 200, 50);
         Google.setBorder(BorderFactory.createRaisedSoftBevelBorder());
         Google.setBackground(new Color(0x075A8F));
-        jLabelHome = new JLabel(loadImage.load("image/home.png", 200, 40), SwingConstants.LEFT);
-        jLabelHome.setBounds(0, 0, 200, 50);
-        jLableG = new JLabel(loadImage.load("image/google.png", 200, 40), SwingConstants.LEFT);
+
+        jLabelAV = new JLabel(loadImage.load("image/DichAnhViet.png", 200, 40), SwingConstants.LEFT);
+        jLabelAV.setBounds(0, 0, 200, 50);
+
+        jLabelVA = new JLabel(loadImage.load("image/DichVietAnh.png", 200, 40), SwingConstants.LEFT);
+        jLabelVA.setBounds(0, 0, 200, 50);
+
+        jLableG = new JLabel(loadImage.load("image/DichVanBan.png", 200, 40), SwingConstants.LEFT);
         jLableG.setBounds(0, 0, 200, 50);
 
-        Home.setLayout(null);
-        Home.add(jLabelHome);
+        searchAV.setLayout(null);
+        searchAV.add(jLabelAV);
+
+        searchVA.setLayout(null);
+        searchVA.add(jLabelVA);
+
         Google.setLayout(null);
         Google.add(jLableG);
-        Home.setVisible(false);
+        searchAV.setVisible(false);
+        searchVA.setVisible(false);
         Google.setVisible(false);
 
         jButton3gach = new JButton(loadImage.load("image/3gach.png", 25, 25));
@@ -50,14 +67,24 @@ public class Menu implements MouseInputListener {
         jButton3gach.setContentAreaFilled(false);
         jButton3gach.setBorder(BorderFactory.createEmptyBorder());
 
+        quit =  new JButton(loadImage.load("image/quit.png",25,25));
+        quit.setBounds(172,613,25,25);
+        quit.setContentAreaFilled(false);
+        quit.setBorder(BorderFactory.createEmptyBorder());
+
         jPanelMenu.add(jButton3gach);
         jPanelMenu.add(DicImage);
-        jPanelMenu.add(Home);
+        jPanelMenu.add(searchAV);
+        jPanelMenu.add(searchVA);
         jPanelMenu.add(Google);
-        Home.addMouseListener(this);
+        jPanelMenu.add(quit);
+
+        searchAV.addMouseListener(this);
+        searchVA.addMouseListener(this);
         Google.addMouseListener(this);
         jPanelMenu.addMouseListener(this);
         jButton3gach.addMouseListener(this);
+        quit.addMouseListener(this);
 
         Dictionary.getFrame().add(jPanelMenu);
     }
@@ -69,7 +96,8 @@ public class Menu implements MouseInputListener {
             PaneGoogleTranslate.getPaneGoogleTranslate().setLocation(jPanelMenu.getWidth(), 0);
             jButton3gach.setLocation(-1000, 2);
             DicImage.setVisible(true);
-            Home.setVisible(true);
+            searchAV.setVisible(true);
+            searchVA.setVisible(true);
             Google.setVisible(true);
         } else {
             jPanelMenu.setLocation(-170, 0);
@@ -77,7 +105,8 @@ public class Menu implements MouseInputListener {
             PaneGoogleTranslate.getPaneGoogleTranslate().setLocation(jPanelMenu.getWidth() + jPanelMenu.getX(), 0);
             jButton3gach.setLocation(172, 2);
             DicImage.setVisible(false);
-            Home.setVisible(false);
+            searchAV.setVisible(false);
+            searchVA.setVisible(false);
             Google.setVisible(false);
 
 
@@ -89,13 +118,30 @@ public class Menu implements MouseInputListener {
         if (e.getSource() == jPanelMenu || e.getSource() == jButton3gach) {
             ActionPane();
         }
-        if (e.getSource() == Home) {
+        if (e.getSource() == searchAV) {
             PaneHome.getPaneHome().setVisible(true);
+            PaneHome.AnhViet = true;
             PaneGoogleTranslate.getPaneGoogleTranslate().setVisible(false);
+            ActionPane();
+            PaneHome.resetPane();
+        }
+        if (e.getSource() == searchVA) {
+            PaneHome.getPaneHome().setVisible(true);
+            PaneHome.AnhViet = false;
+            PaneGoogleTranslate.getPaneGoogleTranslate().setVisible(false);
+            ActionPane();
+            PaneHome.resetPane();
         }
         if (e.getSource() == Google) {
             PaneHome.getPaneHome().setVisible(false);
             PaneGoogleTranslate.getPaneGoogleTranslate().setVisible(true);
+            ActionPane();
+            PaneHome.resetPane();
+        }
+        if(e.getSource() == quit){
+            int a = JOptionPane.showConfirmDialog(Dictionary.getFrame(),"Bạn thật sự muốn thoát?","Thông Báo",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if(a == JOptionPane.YES_OPTION)
+                Dictionary.getFrame().dispose();
         }
     }
 

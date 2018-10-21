@@ -3,6 +3,7 @@ package com.nguyenDat.PaneHome;
 
 import com.nguyenDat.DataDictionary.DataDictionarySQL;
 import com.nguyenDat.Dictionary;
+import com.nguyenDat.Sound.SoundApp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +39,7 @@ public class InputApp implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 10) {
+            SoundApp.setWord(InputApp.getTextInput().getText());
             String mean = DataDictionarySQL.SearchAnhViet(InputApp.getTextInput().getText());
             if (mean == null) {
                 JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ này không có trong từ điển của bạn", "Thông Báo", JOptionPane.DEFAULT_OPTION);
@@ -51,7 +53,6 @@ public class InputApp implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if (InputApp.getTextInput().getText().equals("")) {
             OutputApp.getOutputApp().setText("<html><head></head><body></body></html>");
-            OutputApp.getOutputApp();
             jLabel.setVisible(true);
         } else {
             jLabel.setVisible(false);

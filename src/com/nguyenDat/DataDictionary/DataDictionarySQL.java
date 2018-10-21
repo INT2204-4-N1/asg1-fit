@@ -1,5 +1,7 @@
 package com.nguyenDat.DataDictionary;
 
+import com.nguyenDat.PaneHome.PaneHome;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +16,14 @@ public class DataDictionarySQL {
     }
 
     public static String SearchAnhViet(String w) {
+        String sql;
+        if(PaneHome.AnhViet)
+            sql = "select detail from AnhViet where word = ?";
+        else{
+            sql ="select detail from VietAnh where word = ?";
+        }
         try {
-            pstm = con.prepareStatement("select detail from dictionary where word = ?");
+            pstm = con.prepareStatement(sql);
             pstm.setString(1, w);
 
             ResultSet rs = pstm.executeQuery();
@@ -30,14 +38,15 @@ public class DataDictionarySQL {
         return null;
 
     }
-
-    public static void SearchVietAnh(String word) {
-
-    }
-
     public static String[] ListWord(String word) {
+        String sql;
+        if(PaneHome.AnhViet)
+            sql = "SELECT word FROM AnhViet WHERE word  LIKE ?";
+        else{
+            sql ="SELECT word FROM VietAnh WHERE word  LIKE ?";
+        }
         try {
-            pstm = con.prepareStatement("SELECT word FROM dictionary WHERE word  LIKE ?");
+            pstm = con.prepareStatement(sql);
             pstm.setString(1, word + "%");
             ResultSet rs = pstm.executeQuery();
             String mean[] = new String[101];
@@ -63,8 +72,14 @@ public class DataDictionarySQL {
     }
 
     public static void DeleteWord(String word) {
+        String sql;
+        if(PaneHome.AnhViet)
+            sql = "delete from AnhViet where word = ?";
+        else{
+            sql ="delete from VietAnh where word = ?";
+        }
         try {
-            pstm = con.prepareStatement("delete from dictionary where word = ?");
+            pstm = con.prepareStatement(sql);
             pstm.setString(1, word);
             pstm.executeUpdate();
 
@@ -74,9 +89,14 @@ public class DataDictionarySQL {
     }
 
     public static void UpdateWord(String oldWord, String word, String mean) {
-        System.out.println("dat");
+        String sql;
+        if(PaneHome.AnhViet)
+            sql = "update AnhViet set word = ?,detail = ? where word = ?";
+        else{
+            sql ="update VietAnh set word = ?,detail = ? where word = ?";
+        }
         try {
-            pstm = con.prepareStatement("update dictionary set word = ?,detail = ? where word = ?");
+            pstm = con.prepareStatement(sql);
             pstm.setString(1, word);
             pstm.setString(2, mean);
             pstm.setString(3, oldWord);
@@ -87,8 +107,14 @@ public class DataDictionarySQL {
     }
 
     public static void addWord(String word, String mean) {
+        String sql;
+        if(PaneHome.AnhViet)
+            sql = "insert into AnhViet(word,detail) values (?,?)";
+        else{
+            sql ="insert into VietAnh(word,detail) values (?,?)";
+        }
         try {
-            pstm = con.prepareStatement("insert into dictionary(word,detail) values (?,?)");
+            pstm = con.prepareStatement(sql);
             pstm.setString(1, word);
             pstm.setString(2, mean);
             pstm.executeUpdate();

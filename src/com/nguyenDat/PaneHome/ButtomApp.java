@@ -2,7 +2,6 @@ package com.nguyenDat.PaneHome;
 
 import com.nguyenDat.DataDictionary.*;
 import com.nguyenDat.Dictionary;
-import com.nguyenDat.PaneHome.*;
 import com.nguyenDat.Sound.SoundApp;
 import com.nguyenDat.loadImage;
 
@@ -21,17 +20,17 @@ public class ButtomApp implements ActionListener, MouseInputListener {
         bAdd = new JButton(loadImage.load("image/add.png", 40, 40));
         bAdd.setContentAreaFilled(false);
         bAdd.setBorder(BorderFactory.createEmptyBorder());
-        bAdd.setBounds(680, 95, 40, 40);
+        bAdd.setBounds(380, 95, 40, 40);
 
         bEdit = new JButton(loadImage.load("image/edit.png", 40, 40));
         bEdit.setContentAreaFilled(false);
         bEdit.setBorder(BorderFactory.createEmptyBorder());
-        bEdit.setBounds(630, 95, 40, 40);
+        bEdit.setBounds(330, 95, 40, 40);
 
         bDelete = new JButton(loadImage.load("image/delete.png", 45, 45));
         bDelete.setContentAreaFilled(false);
         bDelete.setBorder(BorderFactory.createEmptyBorder());
-        bDelete.setBounds(730, 95, 40, 40);
+        bDelete.setBounds(430, 95, 40, 40);
 
         bAdd.addActionListener(this);
         bEdit.addActionListener(this);
@@ -43,7 +42,7 @@ public class ButtomApp implements ActionListener, MouseInputListener {
         bSound = new JButton(loadImage.load("image/sound.png", 35, 35));
         bSound.setContentAreaFilled(false);
         bSound.setBorder(BorderFactory.createEmptyBorder());
-        bSound.setBounds(780, 97, 35, 35);
+        bSound.setBounds(480, 97, 35, 35);
 
         bSound.addActionListener(this);
         bSound.addMouseListener(this);
@@ -63,7 +62,7 @@ public class ButtomApp implements ActionListener, MouseInputListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bSound) {
-            SoundApp.Sound();
+            SoundApp.Sound(PaneHome.AnhViet);
         }
         if (e.getSource() == bDelete) {
             DeleteWorḍ(InputApp.getTextInput().getText());
@@ -72,9 +71,9 @@ public class ButtomApp implements ActionListener, MouseInputListener {
             String mean = DataDictionarySQL.SearchAnhViet(InputApp.getTextInput().getText());
             if (mean == null || InputApp.getTextInput().getText().equals("")) {
                 if (InputApp.getTextInput().getText().equals(""))
-                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Nhập từ cần sửa vào ô tìm kiếm", "Thông báo", JOptionPane.DEFAULT_OPTION);
+                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Nhập từ cần sửa vào ô tìm kiếm", "Thông báo", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
                 else
-                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ cần sửa không có trong từ điển của bạn", "Thông báo", JOptionPane.DEFAULT_OPTION);
+                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ cần sửa không có trong từ điển của bạn", "Thông báo", JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             } else {
                 editAddOption.EditWord(InputApp.getTextInput().getText());
             }

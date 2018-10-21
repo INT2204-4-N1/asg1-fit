@@ -104,19 +104,19 @@ public class EditAddOption implements ActionListener, KeyListener {
             DataDictionarySQL.UpdateWord(oldWord, jTextField.getText(), jEditorPane.getText());
             jDialog.dispose();
             ListWord.UpdateList();
-            JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Sủa thành công", "Thông báo", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Sủa thành công", "Thông báo", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
         }
         if (e.getSource() == bThem) {
             if (jTextField.getText().equals("") || mean.equals("")) {
-                JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Không được để trống các ô nhập", "Thông báo", JOptionPane.DEFAULT_OPTION);
+                JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Không được để trống các ô nhập", "Thông báo", JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             } else {
                 String check = DataDictionarySQL.SearchAnhViet(jTextField.getText());
                 if (check == null) {
                     DataDictionarySQL.addWord(jTextField.getText(), jEditorPane.getText());
                     jDialog.dispose();
-                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Thêm thành công", "Thông báo", JOptionPane.DEFAULT_OPTION);
+                    JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Thêm thành công", "Thông báo", JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE);
                 } else {
-                    int a = JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ đã có trong từ điển \n Bạn chỉ có thể chỉnh sửa", "Thông báo", JOptionPane.OK_CANCEL_OPTION);
+                    int a = JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ đã có trong từ điển \n Bạn chỉ có thể chỉnh sửa", "Thông báo", JOptionPane.OK_CANCEL_OPTION,JOptionPane.ERROR_MESSAGE);
 
                     if (a == JOptionPane.YES_OPTION) {
                         jDialog.dispose();

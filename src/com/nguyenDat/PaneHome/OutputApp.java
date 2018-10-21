@@ -1,14 +1,11 @@
 package com.nguyenDat.PaneHome;
 
-import com.nguyenDat.PaneHome.PaneHome;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class OutputApp {
     private static JEditorPane outPut;
     private JScrollPane jScrollPane;
-    private static JButton bSound;
 
     public static JEditorPane getOutputApp() {
         return outPut;
