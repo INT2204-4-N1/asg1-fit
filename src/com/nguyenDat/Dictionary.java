@@ -10,7 +10,7 @@ import java.awt.*;
 public class Dictionary {
 
     private static JFrame mainFrame;
-    private InputApp inputApp;
+    private InputH inputApp;
 
     public static JFrame getFrame() {
         return mainFrame;
@@ -24,10 +24,10 @@ public class Dictionary {
         new PaneHome();
         new PaneGoogleTranslate();
         new Menu();
-        new InputApp();
+        new InputH();
         new ListWord();
-        new OutputApp();
-        new ButtomApp();
+        new OutputH();
+        new ButtomH();
         new DataDictionarySQL();
         mainFrame.setBackground(Color.WHITE);
         mainFrame.setAlwaysOnTop(true);

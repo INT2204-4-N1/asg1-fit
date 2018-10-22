@@ -41,8 +41,8 @@ public class PaneHome {
         Dictionary.getFrame().add(PaneH);
     }
     public static void resetPane(){
-        InputApp.getTextInput().setText("");
-        OutputApp.getOutputApp().setText("<html><head></head><body></body></html>");
+        InputH.getTextInput().setText("");
+        OutputH.getOutputApp().setText("<html><head></head><body></body></html>");
         ListWord.UpdateList();
         if(AnhViet){
             jLabelAnh.setBounds(20,20,50,20);

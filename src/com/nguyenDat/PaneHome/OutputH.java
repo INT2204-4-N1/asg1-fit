@@ -3,7 +3,7 @@ package com.nguyenDat.PaneHome;
 import javax.swing.*;
 import java.awt.*;
 
-public class OutputApp {
+public class OutputH {
     private static JEditorPane outPut;
     private JScrollPane jScrollPane;
 
@@ -11,7 +11,7 @@ public class OutputApp {
         return outPut;
     }
 
-    public OutputApp() {
+    public OutputH() {
         outPut = new JEditorPane();
         outPut.setContentType("text/html");
         outPut.setFocusable(false);

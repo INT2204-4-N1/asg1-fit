@@ -11,11 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
-public class ButtomApp implements ActionListener, MouseInputListener {
+public class ButtomH implements ActionListener, MouseInputListener {
     private JButton bAdd, bEdit, bDelete, bSound;
     private EditAddOption editAddOption;
 
-    public ButtomApp() {
+    public ButtomH() {
         editAddOption = new EditAddOption();
         bAdd = new JButton(loadImage.load("image/add.png", 40, 40));
         bAdd.setContentAreaFilled(false);
@@ -65,17 +65,17 @@ public class ButtomApp implements ActionListener, MouseInputListener {
             SoundApp.Sound(PaneHome.AnhViet);
         }
         if (e.getSource() == bDelete) {
-            DeleteWorḍ(InputApp.getTextInput().getText());
+            DeleteWorḍ(InputH.getTextInput().getText());
         }
         if (e.getSource() == bEdit) {
-            String mean = DataDictionarySQL.SearchAnhViet(InputApp.getTextInput().getText());
-            if (mean == null || InputApp.getTextInput().getText().equals("")) {
-                if (InputApp.getTextInput().getText().equals(""))
+            String mean = DataDictionarySQL.SearchAnhViet(InputH.getTextInput().getText());
+            if (mean == null || InputH.getTextInput().getText().equals("")) {
+                if (InputH.getTextInput().getText().equals(""))
                     JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Nhập từ cần sửa vào ô tìm kiếm", "Thông báo", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
                 else
                     JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ cần sửa không có trong từ điển của bạn", "Thông báo", JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             } else {
-                editAddOption.EditWord(InputApp.getTextInput().getText());
+                editAddOption.EditWord(InputH.getTextInput().getText());
             }
         }
         if (e.getSource() == bAdd) {
@@ -92,7 +92,7 @@ public class ButtomApp implements ActionListener, MouseInputListener {
             if (a == JOptionPane.YES_OPTION) {
                 DataDictionarySQL.DeleteWord(word);
                 JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Xóa thành công", "Thông báo", JOptionPane.DEFAULT_OPTION);
-                OutputApp.getOutputApp().setText("<html><head></head><body></body></html>");
+                OutputH.getOutputApp().setText("<html><head></head><body></body></html>");
                 ListWord.UpdateList();
             }
         }

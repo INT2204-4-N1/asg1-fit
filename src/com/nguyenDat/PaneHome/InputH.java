@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class InputApp implements KeyListener {
+public class InputH implements KeyListener {
     private static JTextField textInput;
     private JLabel jLabel;
 
@@ -18,7 +18,7 @@ public class InputApp implements KeyListener {
         return textInput;
     }
 
-    public InputApp() {
+    public InputH() {
         textInput = new JTextField();
         textInput.setBounds(25, 95, 255, 35);
         textInput.setFont(new Font(Font.DIALOG, Font.BOLD, 14));
@@ -39,20 +39,20 @@ public class InputApp implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 10) {
-            SoundApp.setWord(InputApp.getTextInput().getText());
-            String mean = DataDictionarySQL.SearchAnhViet(InputApp.getTextInput().getText());
+            SoundApp.setWord(InputH.getTextInput().getText());
+            String mean = DataDictionarySQL.SearchAnhViet(InputH.getTextInput().getText());
             if (mean == null) {
                 JOptionPane.showConfirmDialog(Dictionary.getFrame(), "Từ này không có trong từ điển của bạn", "Thông Báo", JOptionPane.DEFAULT_OPTION);
             } else {
-                OutputApp.getOutputApp().setText(mean);
+                OutputH.getOutputApp().setText(mean);
             }
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (InputApp.getTextInput().getText().equals("")) {
-            OutputApp.getOutputApp().setText("<html><head></head><body></body></html>");
+        if (InputH.getTextInput().getText().equals("")) {
+            OutputH.getOutputApp().setText("<html><head></head><body></body></html>");
             jLabel.setVisible(true);
         } else {
             jLabel.setVisible(false);
