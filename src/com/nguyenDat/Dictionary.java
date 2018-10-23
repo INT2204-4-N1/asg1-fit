@@ -24,11 +24,7 @@ public class Dictionary {
         new PaneHome();
         new PaneGoogleTranslate();
         new Menu();
-        new InputH();
-        new ListWord();
-        new OutputH();
-        new ButtomH();
-        new DataDictionarySQL();
+
         mainFrame.setBackground(Color.WHITE);
         mainFrame.setAlwaysOnTop(true);
         mainFrame.setLayout(null);

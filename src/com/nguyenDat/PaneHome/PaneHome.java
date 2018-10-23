@@ -1,5 +1,6 @@
 package com.nguyenDat.PaneHome;
 
+import com.nguyenDat.DataDictionary.DataDictionarySQL;
 import com.nguyenDat.Dictionary;
 import com.nguyenDat.loadImage;
 
@@ -18,6 +19,12 @@ public class PaneHome {
     public PaneHome() {
         PaneH.setBounds(30, 0, 900, 680);
         PaneH.setLayout(null);
+        new InputH();
+        new ListWord();
+        new OutputH();
+        new ButtomH();
+        new DataDictionarySQL();
+
         SearchAnhViet = new JPanel();
         SearchAnhViet.setBounds(30,30,250,50);
         SearchAnhViet.setLayout(null);

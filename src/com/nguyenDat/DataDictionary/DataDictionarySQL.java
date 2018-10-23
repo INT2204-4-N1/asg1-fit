@@ -49,7 +49,7 @@ public class DataDictionarySQL {
             pstm = con.prepareStatement(sql);
             pstm.setString(1, word + "%");
             ResultSet rs = pstm.executeQuery();
-            String mean[] = new String[101];
+            String mean[] = new String[201];
             mean[0] = SearchAnhViet(word);
             int i = 0;
             if(mean[0] != null){
@@ -61,9 +61,9 @@ public class DataDictionarySQL {
                 mean[i] = rs.getString("word");
                 if(mean[i].equals(word)) continue;
                 i++;
-                if (i > 100) return mean;
+                if (i > 200) return mean;
             }
-            if (i < 100) {
+            if (i < 200) {
                 String[] mean2 = new String[i];
                 for (int j = 0; j < i; j++) {
                     mean2[j] = mean[j];

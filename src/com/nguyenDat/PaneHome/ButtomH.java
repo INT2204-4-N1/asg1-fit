@@ -7,6 +7,7 @@ import com.nguyenDat.loadImage;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -14,6 +15,8 @@ import java.awt.event.MouseEvent;
 public class ButtomH implements ActionListener, MouseInputListener {
     private JButton bAdd, bEdit, bDelete, bSound;
     private EditAddOption editAddOption;
+    private JLabel GoiY;
+    private JPanel KhungGoiY;
 
     public ButtomH() {
         editAddOption = new EditAddOption();
@@ -21,6 +24,13 @@ public class ButtomH implements ActionListener, MouseInputListener {
         bAdd.setContentAreaFilled(false);
         bAdd.setBorder(BorderFactory.createEmptyBorder());
         bAdd.setBounds(380, 95, 40, 40);
+
+        KhungGoiY = new JPanel();
+        KhungGoiY.setSize(70,20);
+        GoiY  = new JLabel();
+        GoiY.setSize(70,20);
+        KhungGoiY.setBackground(Color.WHITE);
+        KhungGoiY.add(GoiY);
 
         bEdit = new JButton(loadImage.load("image/edit.png", 40, 40));
         bEdit.setContentAreaFilled(false);
@@ -47,12 +57,13 @@ public class ButtomH implements ActionListener, MouseInputListener {
         bSound.addActionListener(this);
         bSound.addMouseListener(this);
 
+        KhungGoiY.setVisible(false);
         bAdd.setEnabled(false);
         bSound.setEnabled(false);
         bDelete.setEnabled(false);
         bEdit.setEnabled(false);
 
-
+        PaneHome.getPaneHome().add(KhungGoiY);
         PaneHome.getPaneHome().add(bSound);
         PaneHome.getPaneHome().add(bAdd);
         PaneHome.getPaneHome().add(bEdit);
@@ -105,7 +116,6 @@ public class ButtomH implements ActionListener, MouseInputListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
@@ -117,16 +127,25 @@ public class ButtomH implements ActionListener, MouseInputListener {
     public void mouseEntered(MouseEvent e) {
         if (e.getSource() == bSound) {
             bSound.setEnabled(true);
+            KhungGoiY.setLocation(bSound.getX(),bSound.getY() - GoiY.getHeight() - 5);
+            GoiY.setText("Phát âm");
         }
         if (e.getSource() == bAdd) {
             bAdd.setEnabled(true);
+            KhungGoiY.setLocation(bAdd.getX(),bAdd.getY() - GoiY.getHeight() - 5);
+            GoiY.setText("Thêm từ");
         }
         if (e.getSource() == bDelete) {
             bDelete.setEnabled(true);
+            KhungGoiY.setLocation(bDelete.getX(),bDelete.getY() - GoiY.getHeight() - 5);
+            GoiY.setText("Xóa từ");
         }
         if (e.getSource() == bEdit) {
             bEdit.setEnabled(true);
+            KhungGoiY.setLocation(bEdit.getX(),bEdit.getY() - GoiY.getHeight() - 5);
+            GoiY.setText("Chỉnh sửa");
         }
+        KhungGoiY.setVisible(true);
     }
 
     @Override
@@ -143,6 +162,7 @@ public class ButtomH implements ActionListener, MouseInputListener {
         if (e.getSource() == bEdit) {
             bEdit.setEnabled(false);
         }
+        KhungGoiY.setVisible(false);
     }
 
     @Override

@@ -17,17 +17,20 @@ public class ButtonG implements ActionListener{
         bsearchAV = new JButton();
         bsearchAV.setText("Search A-V");
         bsearchAV.setBackground(new Color(0x07658F));
+        bsearchAV.setForeground(Color.WHITE);
         bsearchAV.setBorder(BorderFactory.createRaisedSoftBevelBorder());
         bsearchAV.setBounds(30, 255, 90, 22);
 
         bsearchVA = new JButton();
         bsearchVA.setText("Search V-A");
         bsearchVA.setBackground(new Color(0x07658F));
+        bsearchVA.setForeground(Color.WHITE);
         bsearchVA.setBorder(BorderFactory.createRaisedSoftBevelBorder());
         bsearchVA.setBounds(140, 255, 90, 22);
         bSound1 = new JButton("Sound");
         bSound1.setBounds(240,255,90,22);
         bSound1.setBackground(new Color(0x07658F));
+        bSound1.setForeground(Color.WHITE);
         bSound1.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 
         bsearchVA.addActionListener(this);
